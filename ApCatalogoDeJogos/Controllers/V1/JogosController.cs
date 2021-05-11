@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ApCatalogoDeJogos.InputModel;
+using ApCatalogoDeJogos.Service;
+using ApCatalogoDeJogos.ViewModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,26 +15,54 @@ namespace ApCatalogoDeJogos.Controllers.V1
     [ApiController]
     public class JogosController : ControllerBase
     {
-        [HttpGet]
-        public async Task<ActionResult<List<object>>> Obter()
+
+        private readonly IJogoService _jogoService;
+
+        public JogosController(IJogoService jogoService)
         {
-            return Ok();
+            _jogoService = jogoService;
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<JogoViewModel>>> Obter([FromQuery, Range(1, int.MaxValue)] int pagina =1, [FromQuery, Range(1, 50)] int quantidade = 5)
+        {
+            var jogos = await _jogoService.Obter(pagina, quantidade);
+
+            if (jogos.Count() == 0)
+                return NoContent();
+
+            return Ok(jogos);
         }
 
         [HttpGet("{idJogo:Guid}")]
-        public async Task<ActionResult<object>> Obter(Guid idJogo)
+        public async Task<ActionResult<JogoViewModel>> Obter([FromRoute] Guid idJogo)
         {
+            var jogo = await _jogoService.Obter(idJogo);
+
+            if (jogo == null)
+                return NoContent();
             return Ok();
         }
 
         [HttpPost]
-        public async Task<ActionResult<object>> InserirJogo(object jogo)
+        public async Task<ActionResult<JogoViewModel>> InserirJogo([FromBody] JogoInputModel jogoInputModel)
         {
-            return Ok();
+            try
+            {
+                var jogo = await _jogoService.Inserir(jogoInputModel);
+
+                return Ok(jogo);
+            }
+            //catch (JogoJaCadastradoException ex)
+            catch (Exception)
+            {
+                return UnprocessableEntity("já existe um jogo com este nome para esta produtora");
+            }
         }
 
         [HttpPut("{idJogo:Guid}")]
-        public async Task<ActionResult> AtualizarJogo(Guid idJogo, object jogo)
+        public async Task<ActionResult> AtualizarJogo(Guid idJogo, JogoInputModel jogo)
         {
             return Ok();
         }
