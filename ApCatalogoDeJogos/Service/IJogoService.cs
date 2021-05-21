@@ -15,5 +15,6 @@ namespace ApCatalogoDeJogos.Service
         Task Atualzar(Guid id, JogoInputModel jogo);
         Task Atualzar(Guid id, double preco);
         Task Remover(Guid id);
+        Task Obter(int pagina, object quantidade);
     }
 }
