@@ -42,7 +42,7 @@ namespace ApCatalogoDeJogos.Controllers.V1
 
             if (jogo == null)
                 return NoContent();
-            return Ok();
+            return Ok(jogo);
         }
 
         [HttpPost]
@@ -62,21 +62,59 @@ namespace ApCatalogoDeJogos.Controllers.V1
         }
 
         [HttpPut("{idJogo:Guid}")]
-        public async Task<ActionResult> AtualizarJogo(Guid idJogo, JogoInputModel jogo)
+        public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, [FromBody] JogoInputModel jogoInputModel)
         {
-            return Ok();
+            try
+            {
+                await _jogoService.Atualizar(idJogo, jogoInputModel);
+
+
+                return Ok();
+            }
+            //catch (jogoNaoCadastradoException ex )
+            catch (Exception ex)
+            {
+                return NotFound("Não existe este jogo");
+            }
+                
+            
         }
 
         [HttpPatch("{idJogo:Guid}/preco/{preco:double}")]
-        public async Task<ActionResult> AtualizarJogo(Guid idJogo, double jogo)
-        {
-            return Ok();
+        public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, [FromRoute] double preco)
+        { 
+        try
+            {
+                await _jogoService.Atualizar(idJogo, preco);
+
+                return Ok();
+            }
+            //catch (jogoNaoCadastradoException ex)
+            catch (Exception ex)
+            {
+                return NotFound("Não existe este jogo");
+
+            }
         }
 
         [HttpDelete("{idJogo:Guid}")]
-        public async Task<ActionResult> ApagarJogo(Guid idJogo)
+        public async Task<ActionResult> ApagarJogo([FromRoute] Guid idJogo)
         {
-            return Ok();
+            try
+            {
+                await _jogoService.Remover(idJogo);
+
+                return Ok();
+            }
+
+            //catch (jogoNaoCadastradoException ex)
+            catch (Exception ex)
+            {
+                return NotFound("Não existe este jogo");
+
+            }
+
+
         }
     }
 }
