@@ -49,6 +49,22 @@ namespace ExemploApiCatalogoJogos.Services
             };
         }
 
+        /*public async Task<JogoViewModel> Obter(string nome)
+        {
+            var jogo = await _jogoRepository.Obter(nome);
+
+            if (jogo == null)
+                return null;
+
+            return new JogoViewModel
+            {
+                Id = jogo.Id,
+                Nome = jogo.Nome,
+                Produtora = jogo.Produtora,
+                Preco = jogo.Preco
+            };
+        }*/
+
         public async Task<JogoViewModel> Inserir(JogoInputModel jogo)
         {
             var entidadeJogo = await _jogoRepository.Obter(jogo.Nome, jogo.Produtora);

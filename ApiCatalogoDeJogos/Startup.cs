@@ -1,4 +1,5 @@
 using ExemploApiCatalogoJogos.Controllers.V1;
+using ExemploApiCatalogoJogos.Middleware;
 using ExemploApiCatalogoJogos.Repositories;
 using ExemploApiCatalogoJogos.Services;
 using Microsoft.AspNetCore.Builder;
@@ -12,7 +13,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace ApiCatalogoDeJogos
@@ -44,6 +47,10 @@ namespace ApiCatalogoDeJogos
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiCatalogoDeJogos", Version = "v1" });
+
+                var basePath = AppDomain.CurrentDomain.BaseDirectory;
+                var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
+                c.IncludeXmlComments(Path.Combine(basePath, fileName));
             });
         }
 
@@ -56,6 +63,8 @@ namespace ApiCatalogoDeJogos
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiCatalogoDeJogos v1"));
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

@@ -1,4 +1,4 @@
-﻿using ExemploApiCatalogoJogos.Entities;
+﻿/*using ExemploApiCatalogoJogos.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExemploApiCatalogoJogos.Repositories
 {
-    public class JogoRepository : IJogoRepository
+    public class JogoRepository //: IJogoRepository
     {
         private static Dictionary<Guid, Jogo> jogos = new Dictionary<Guid, Jogo>()
         {
@@ -30,6 +30,9 @@ namespace ExemploApiCatalogoJogos.Repositories
 
             return Task.FromResult(jogos[id]);
         }
+
+       
+
 
         public Task<List<Jogo>> Obter(string nome, string produtora)
         {
@@ -73,3 +76,4 @@ namespace ExemploApiCatalogoJogos.Repositories
         }
     }
 }
+*/

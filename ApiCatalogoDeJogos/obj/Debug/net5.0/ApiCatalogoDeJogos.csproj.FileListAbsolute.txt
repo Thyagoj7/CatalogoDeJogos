@@ -33,3 +33,4 @@ C:\Users\ty_jo\Documents\Estudo\Projetos\CatalogoDeJogos\ApiCatalogoDeJogos\obj\
 C:\Users\ty_jo\Documents\Estudo\Projetos\CatalogoDeJogos\ApiCatalogoDeJogos\obj\Debug\net5.0\ref\ApiCatalogoDeJogos.dll
 C:\Users\ty_jo\Documents\Estudo\Projetos\CatalogoDeJogos\ApiCatalogoDeJogos\obj\Debug\net5.0\ApiCatalogoDeJogos.pdb
 C:\Users\ty_jo\Documents\Estudo\Projetos\CatalogoDeJogos\ApiCatalogoDeJogos\obj\Debug\net5.0\ApiCatalogoDeJogos.genruntimeconfig.cache
+C:\Users\ty_jo\Documents\Estudo\Projetos\CatalogoDeJogos\ApiCatalogoDeJogos\bin\Debug\net5.0\ApiCatalogoDeJogos.xml

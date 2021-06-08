@@ -9,6 +9,7 @@ namespace ExemploApiCatalogoJogos.Repositories
     {
         Task<List<Jogo>> Obter(int pagina, int quantidade);
         Task<Jogo> Obter(Guid id);
+       // Task<Jogo> Obter(string nome);
         Task<List<Jogo>> Obter(string nome, string produtora);
         Task Inserir(Jogo jogo);
         Task Atualizar(Jogo jogo);

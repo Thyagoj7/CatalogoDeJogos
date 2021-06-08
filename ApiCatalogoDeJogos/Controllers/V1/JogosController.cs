@@ -60,6 +60,21 @@ namespace ExemploApiCatalogoJogos.Controllers.V1
             return Ok(jogo);
         }
 
+
+        
+
+       /* [HttpGet("{nomeJogo:string}")]
+        public async Task<ActionResult<JogoViewModel>> Obter([FromRoute] string nomeJogo)
+        {
+
+            var jogo = await _jogoService.Obter(nomeJogo);
+
+            if (jogo == null)
+                return NoContent();
+
+            return Ok(jogo);
+        }*/
+
         /// <summary>
         /// Inserir um jogo no catálogo
         /// </summary>

@@ -68,6 +68,31 @@ namespace ExemploApiCatalogoJogos.Repositories
 
             return jogo;
         }
+        /*public async Task<Jogo> Obter(string nome)
+        {
+            Jogo jogo = null;
+
+            var comando = $"select * from Jogos where Nome = '{nome}'";
+
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommand = new SqlCommand(comando, sqlConnection);
+            SqlDataReader sqlDataReader = await sqlCommand.ExecuteReaderAsync();
+
+            while (sqlDataReader.Read())
+            {
+                jogo = new Jogo
+                {
+                    Id = (Guid)sqlDataReader["Id"],
+                    Nome = (string)sqlDataReader["Nome"],
+                    Produtora = (string)sqlDataReader["Produtora"],
+                    Preco = (double)sqlDataReader["Preco"]
+                };
+            }
+
+            await sqlConnection.CloseAsync();
+
+            return jogo;
+        */
 
         public async Task<List<Jogo>> Obter(string nome, string produtora)
         {
